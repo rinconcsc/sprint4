@@ -63,27 +63,27 @@ public class UserController {
 	
 	@PostMapping(value = "/user")
 	public ResponseEntity<UserDTO> create(@RequestBody User user){
-		User newUser = userService.save(user);
+		User newUserCreate = userService.save(user);
 		
 		UserDTO userDto = UserDTO.builder()
-				.id(user.getId())
-				.name(user.getName())
-				.password(user.getPassword())
-				.email(user.getEmail())
+				.id(newUserCreate.getId())
+				.name(newUserCreate.getName())
+				.password(newUserCreate.getPassword())
+				.email(newUserCreate.getEmail())
 				.build();
 		return new ResponseEntity<UserDTO>(userDto, HttpStatus.CREATED);
 	}
 	
 	@PutMapping(value = "/user")
 	public ResponseEntity<UserDTO> update(@RequestBody User user){
-		User newUser = userService.save(user);
+		User newUserUpdate = userService.save(user);
 		
 		UserDTO userDto = UserDTO.builder()
-				.id(user.getId())
-				.name(user.getName())
-				.password(user.getPassword())
-				.email(user.getEmail())
+				.id(newUserUpdate.getId())
+				.name(newUserUpdate.getName())
+				.password(newUserUpdate.getPassword())
+				.email(newUserUpdate.getEmail())
 				.build();
-		return new ResponseEntity<UserDTO>(userDto, HttpStatus.CREATED);
+		return new ResponseEntity<UserDTO>(userDto, HttpStatus.OK);
 	}
 }
