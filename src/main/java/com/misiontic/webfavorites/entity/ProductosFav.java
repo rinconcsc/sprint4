@@ -1,18 +1,15 @@
 package com.misiontic.webfavorites.entity;
 
-
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,26 +23,23 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="users")
-public class User {
+@Table(name = "productos_favoritos")
+public class ProductosFav {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
-	private Long id;
+	@Column(name = "idProducto")
+	private Long idProducto;
 	
-	@Column(name="name", length = 100, nullable = false)
-	private String name;
+	@Column(name = "name_producto",length = 100, nullable = false)
+	private String nameProducto;
 	
-	@Column(name="password", length = 200, nullable = false)
-	private String password;
+	@Column(name = "descripcion",length = 500, nullable = false)
+	private String descripcion;
 	
-	@Column(name="email", length= 100, nullable = false)
-	private String email;
-	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_user", nullable =true)
-	private List<ProductosFav> productosFav;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(foreignKey = @ForeignKey(name = "fk_productos_favoritos_users_id"), name="id_user", referencedColumnName = "id")
+	private User idUser;
 	
 	
 }

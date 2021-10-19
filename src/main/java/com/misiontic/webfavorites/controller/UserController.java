@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.misiontic.webfavorites.dtos.UserDTO;
+import com.misiontic.webfavorites.entity.ProductosFav;
 import com.misiontic.webfavorites.entity.User;
 import com.misiontic.webfavorites.services.UserService;
 
@@ -86,4 +87,11 @@ public class UserController {
 				.build();
 		return new ResponseEntity<UserDTO>(userDto, HttpStatus.OK);
 	}
+	
+	@PutMapping(value= "/user/{userId}/{productoId}")
+	public ResponseEntity<Void> addFav(@PathVariable("userId") User userId,@PathVariable("productoId") ProductosFav productoId ){ 		
+		userService.addFav(userId, productoId);
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
 }
