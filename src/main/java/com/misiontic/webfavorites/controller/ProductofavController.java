@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.misiontic.webfavorites.dtos.ProductosFavDTO;
-import com.misiontic.webfavorites.entity.ProductosFav;
+import com.misiontic.webfavorites.entity.ProductoFav;
 import com.misiontic.webfavorites.services.ProductoFavService;
 
 @RestController
@@ -23,11 +23,11 @@ public class ProductofavController {
 
 	@Autowired
 	private ProductoFavService productoFavService;
-	
+
 	@GetMapping(value = "/producto")
 	public ResponseEntity<List<ProductosFavDTO>> findAll() {
-		List<ProductosFav> productos= productoFavService.findAll();
-		
+		List<ProductoFav> productos= productoFavService.findAll();
+
 		List<ProductosFavDTO> productosDto = productos.stream().map(producto -> {
 			return ProductosFavDTO.builder()
 					.idProducto(producto.getIdProducto())
@@ -35,52 +35,52 @@ public class ProductofavController {
 					.descripcion(producto.getDescripcion())
 					.build();
 		}).collect(Collectors.toList());
-		
-		return new ResponseEntity<List<ProductosFavDTO>>(productosDto, HttpStatus.OK);
-		
+
+		return new ResponseEntity<>(productosDto, HttpStatus.OK);
+
 	}
-	
+
 	@GetMapping(value = "/producto/{productoId}")
 	public ResponseEntity<ProductosFavDTO> findById(@PathVariable("productoId") Long productoId){
-		ProductosFav producto = productoFavService.fingById(productoId);
-		
+		ProductoFav producto = productoFavService.fingById(productoId);
+
 		ProductosFavDTO productoDto = ProductosFavDTO.builder()
 				.idProducto(producto.getIdProducto())
 				.nameProducto(producto.getNameProducto())
 				.descripcion(producto.getDescripcion())
 				.build();
-	
-		return new ResponseEntity<ProductosFavDTO>(productoDto, HttpStatus.OK);
+
+		return new ResponseEntity<>(productoDto, HttpStatus.OK);
 	}
 
 	@DeleteMapping(value = "/producto/{productoId}")
 	public ResponseEntity<Void> delete(@PathVariable("productoId") Long productoId){
 		productoFavService.delete(productoId);
-		return new ResponseEntity<Void>(HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/producto")
-	public ResponseEntity<ProductosFavDTO> create(@RequestBody ProductosFav producto){
-		ProductosFav newProductCreate = productoFavService.save(producto);
-		
+	public ResponseEntity<ProductosFavDTO> create(@RequestBody ProductoFav producto){
+		ProductoFav newProductCreate = productoFavService.save(producto);
+
 		ProductosFavDTO productoDto = ProductosFavDTO.builder()
 				.idProducto(newProductCreate.getIdProducto())
 				.nameProducto(newProductCreate.getNameProducto())
 				.descripcion(newProductCreate.getDescripcion())
 				.build();
-		return new ResponseEntity<ProductosFavDTO>(productoDto, HttpStatus.CREATED);
+		return new ResponseEntity<>(productoDto, HttpStatus.CREATED);
 	}
-	
+
 	@PutMapping(value = "/producto")
-	public ResponseEntity<ProductosFavDTO> update(@RequestBody ProductosFav producto){
-		ProductosFav newProductUpdate = productoFavService.save(producto);
-		
+	public ResponseEntity<ProductosFavDTO> update(@RequestBody ProductoFav producto){
+		ProductoFav newProductUpdate = productoFavService.save(producto);
+
 		ProductosFavDTO productoDto = ProductosFavDTO.builder()
 				.idProducto(newProductUpdate.getIdProducto())
 				.nameProducto(newProductUpdate.getNameProducto())
 				.descripcion(newProductUpdate.getDescripcion())
 				.build();
-		return new ResponseEntity<ProductosFavDTO>(productoDto, HttpStatus.OK);
+		return new ResponseEntity<>(productoDto, HttpStatus.OK);
 	}
-
+		
 }

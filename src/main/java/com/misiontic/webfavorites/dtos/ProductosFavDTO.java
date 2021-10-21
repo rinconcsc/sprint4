@@ -1,6 +1,5 @@
 package com.misiontic.webfavorites.dtos;
 
-import com.misiontic.webfavorites.entity.User;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -10,9 +9,8 @@ import lombok.Setter;
 @Setter
 @Builder
 public class ProductosFavDTO {
-	
+
 	private Long idProducto;
 	private String nameProducto;
 	private String descripcion;
-	private User idUser;
 }

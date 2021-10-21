@@ -1,5 +1,7 @@
 package com.misiontic.webfavorites.dtos;
 
+
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +15,5 @@ public class UserDTO {
 	private String name;
 	private String password;
 	private String email;
-	
-	
+
 }
